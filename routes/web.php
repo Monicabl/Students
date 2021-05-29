@@ -14,6 +14,11 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::resource('/students','studentController');
-Route::resource('/subjects','subjectController');
-Route::resource('/periods','periodController');
+
+Route::resource('/students','StudentController');
+Route::resource('/subjects','SubjectController');
+Route::resource('/periods','PeriodController');
+
+Route::post('/periods/{period}/attach-student','PeriodController@attachStudent');
+Route::get('/periods/{period}/attach-student','PeriodController@attachStudentView');
+Route::get('/periods/{period}/detach-student/{student_id}','PeriodController@detachStudent');

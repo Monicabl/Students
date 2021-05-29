@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Period;
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class periodController extends Controller
@@ -13,7 +16,8 @@ class periodController extends Controller
      */
     public function index()
     {
-        return view('periods.index');
+        $periods = Period::all();
+        return view('periods.index')->with(['periods' => $periods]);
     }
 
     /**
@@ -23,7 +27,7 @@ class periodController extends Controller
      */
     public function create()
     {
-        //
+        return view('periods.create');
     }
 
     /**
@@ -45,7 +49,8 @@ class periodController extends Controller
      */
     public function show($id)
     {
-        //
+        $period = Period::find($id);
+        return view('periods.show')->with('period', $period);
     }
 
     /**
@@ -56,7 +61,8 @@ class periodController extends Controller
      */
     public function edit($id)
     {
-        //
+        $period = Period::find($id);
+        return view('periods.edit')->with('period', $period);
     }
 
     /**
@@ -80,5 +86,33 @@ class periodController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    // VINCULANDO STUDIANTES
+    public function attachStudentView($id)
+    {
+        $period = Period::find($id);
+        $students = User::where('user_type', 'estudiante')->whereDoesntHave('periods', function (Builder $query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+
+        return view('periods.attach_student')->with([
+            'students' => $students,
+            'period' => $period
+        ]);
+    }
+
+    public function attachStudent($id, Request $request)
+    {
+        $period = Period::find($id);
+        $period->students()->attach($request->user_id);
+        return redirect('periods/'. $id);
+    }
+    public function detachStudent($id, $student_id)
+    {
+        $period = Period::find($id);
+        $period->students()->detach($student_id);
+        return back();
     }
 }
