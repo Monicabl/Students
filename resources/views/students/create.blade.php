@@ -6,7 +6,7 @@
         <a class="btn btn-outline-success" href="/students/"> Back</a>
     </div>
     <div class="col-8">
-        <h2> Agregar nuevo estudiante</h2> <br>
+        <h2> Agregar nuevo estudiante: </h2> <br>
     </div>
 </div>
     <form action="">
@@ -17,11 +17,11 @@
               </div>
               <div class="form-group col-md-6">
                 <label> Correo </label>
-                <input type="text" class="form-control" id="" name="" placeholder="@ correo" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="@ correo" required>
               </div>
             <div class="form-group col-md-6">
               <label> Apellidos</label>
-              <input type="text" class="form-control" id="" name="" placeholder="Apellidos" required>
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Apellidos" required>
             </div>
             <div class="form-group col-md-6">
               <label> Nombre </label>
