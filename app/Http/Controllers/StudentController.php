@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Period;
+use App\User;
 use Illuminate\Http\Request;
 
 class studentController extends Controller
@@ -12,8 +14,9 @@ class studentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('students.index');
+    {   $students = user::all();
+        return view('students.index')->with(['students' => $students]);
+
     }
 
     /**
@@ -44,8 +47,9 @@ class studentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        return view('students.show');
+    {   
+        $student = User::find($id);
+        return view('students.show')->with('student', $student);
     }
 
     /**
@@ -56,7 +60,10 @@ class studentController extends Controller
      */
     public function edit($id)
     {
-        return view('students.edit');
+        $student = User::find($id);
+        return view('students.edit')->with('student', $student);
+        
+
     }
 
     /**

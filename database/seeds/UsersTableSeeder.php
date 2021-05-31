@@ -16,7 +16,6 @@ class UsersTableSeeder extends Seeder
         $user->name = 'Rocky';
         $user->last_name = 'Barboa';
         $user->email = 'rocky@gmail.com';
-        $user->password = 'asdfasdf4';
         $user->user_type = 'estudiante';
         $user->save();
 
@@ -24,7 +23,6 @@ class UsersTableSeeder extends Seeder
         $user->name = 'Chato';
         $user->last_name = 'Colocho';
         $user->email = 'chato@gmail.com';
-        $user->password = 'asdfasdf4';
         $user->user_type = 'estudiante';
         $user->save();
 

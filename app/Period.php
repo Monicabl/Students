@@ -10,4 +10,9 @@ class Period extends Model
     {
         return $this->belongsToMany(User::class, 'period_user');
     }
+
+    public function parcials()
+    {
+        return $this->hasMany(Parcial::class);
+    }
 }

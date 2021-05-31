@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Parcial;
 use App\Period;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-class periodController extends Controller
+class ParcialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $periods = Period::all();
-        return view('periods.index')->with(['periods' => $periods]);
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +19,7 @@ class periodController extends Controller
      */
     public function create()
     {
-        return view('periods.create');
+        return view('parcials.create');
     }
 
     /**
@@ -36,22 +28,12 @@ class periodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($period_id, Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $period = Period::find($id);
-        return view('periods.show')->with('period', $period);
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -61,7 +43,7 @@ class periodController extends Controller
      */
     public function edit($id)
     {
-        $period = Period::find($id);
+        $period = Parcial::find($id);
         return view('periods.edit')->with('period', $period);
     }
 
