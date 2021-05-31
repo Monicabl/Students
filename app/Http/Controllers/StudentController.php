@@ -37,7 +37,13 @@ class studentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new User();
+        $student->last_name = $request->get('last_name');
+        $student->name = $request->get('name');
+        $student->email = $request->get('email');
+        // $student->description = $request->get('description');
+        $student->save();
+        return redirect('/students');
     }
 
     /**

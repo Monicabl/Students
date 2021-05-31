@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
+use App\Http\Controllers\studentController;
+
 Route::resource('/students','StudentController');
 Route::resource('/subjects','SubjectController');
 Route::resource('/periods','PeriodController');
@@ -22,3 +24,4 @@ Route::resource('/periods','PeriodController');
 Route::post('/periods/{period}/attach-student','PeriodController@attachStudent');
 Route::get('/periods/{period}/attach-student','PeriodController@attachStudentView');
 Route::get('/periods/{period}/detach-student/{student_id}','PeriodController@detachStudent');
+Route::post('/students/create', 'StudentController@store');
