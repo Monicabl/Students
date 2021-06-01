@@ -20,7 +20,6 @@ use App\Http\Controllers\studentController;
 Route::resource('/students','StudentController');
 Route::resource('/subjects','SubjectController');
 Route::resource('/periods','PeriodController');
-
 Route::post('/periods/{period}/attach-student','PeriodController@attachStudent');
 Route::get('/periods/{period}/attach-student','PeriodController@attachStudentView');
 Route::get('/periods/{period}/detach-student/{student_id}','PeriodController@detachStudent');
@@ -31,3 +30,6 @@ Route::get('/periods/{period}/detach-subject/{subject_id}','PeriodController@det
 
 Route::get('/students/{student}/qualifications/{period_id}','StudentController@qualificationsView');
 Route::post('/students/{student}/qualifications/{period_id}','StudentController@qualificationsSave');
+Route::get('/periods/{id}/parcial_create', 'ParcialController@create');
+Route::post('/periods/{id}/parcial_create', 'ParcialController@store');
+Route::get('/periods/{id}/parcial_delete/{parcial_id}', 'ParcialController@destroy');

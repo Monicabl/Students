@@ -17,9 +17,10 @@ class ParcialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($period_id)
     {
-        return view('parcials.create');
+        $period = Period::find($period_id);
+        return view('parcials.create')->with('period', $period);
     }
 
     /**
@@ -30,75 +31,27 @@ class ParcialController extends Controller
      */
     public function store($period_id, Request $request)
     {
-        //
+        $parcial = new Parcial();
+        $parcial->period_id = $period_id;
+        $parcial->name = $request->get('name');
+        $parcial->beginning = $request->get('beginning');
+        $parcial->end = $request->get('end');
+        $parcial->save();
+        return redirect('/periods/'. $period_id);
+
+
     }
-
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $period = Parcial::find($id);
-        return view('periods.edit')->with('period', $period);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $parcial_id)
     {
-        //
+        $parcial = Parcial::find($parcial_id);
+        $parcial->delete();
+        return redirect('/periods/'. $id);
     }
 
-
-    // VINCULANDO STUDIANTES
-    public function attachStudentView($id)
-    {
-        $period = Period::find($id);
-        $students = User::where('user_type', 'estudiante')
-                ->whereDoesntHave('periods', function (Builder $query) use ($id) {
-                    $query->where('id', $id);
-                })->get();
-        // $students = User::where('user_type', 'estudiante')
-        //         ->whereDoesntHave('periods')->pluck('id');
-
-
-        return view('periods.attach_student')->with([
-            'students' => $students,
-            'period' => $period
-        ]);
-    }
-
-    public function attachStudent($id, Request $request)
-    {
-        $period = Period::find($id);
-        $period->students()->attach($request->user_id);
-        return redirect('periods/'. $id);
-    }
-    public function detachStudent($id, $student_id)
-    {
-        $period = Period::find($id);
-        $period->students()->detach($student_id);
-        return back();
-    }
 }

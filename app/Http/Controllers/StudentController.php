@@ -115,7 +115,7 @@ class studentController extends Controller
     public function qualificationsView($id, $period_id)
     {
         $student = User::find($id);
-        $period = Period::find($id);
+        $period = Period::find($period_id);
         return view('students.qualifications')->with([
             'student' => $student,
             'period' => $period
@@ -130,21 +130,27 @@ class studentController extends Controller
         $qualifications = [];
 
         $request =  $request->all() ;
+        // dd($request);
         foreach ($period->subjects as $subject) {
 
-            $qualification = Qualification::where('user_id', $id)
-                        ->where('period_id', $period_id)
-                        ->where('subject_id', $subject->id)->first();
-
-            if(! $qualification) {
-                $qualification = new Qualification;
-                $qualification->subject_id = $subject->id;
-                $qualification->period_id = $period_id;
-                $qualification->user_id = $id;
+            foreach ($period->parcials as $parcial) {
+                
+                $qualification = Qualification::where('user_id', $id)
+                            ->where('parcial_id', $parcial->id)
+                            ->where('subject_id', $subject->id)->first();
+    
+                if(! $qualification) {
+                    $qualification = new Qualification;
+                    $qualification->subject_id = $subject->id;
+                    $qualification->period_id = $period_id;
+                    $qualification->parcial_id = $parcial->id;
+                    $qualification->user_id = $id;
+                }
+    
+                $qualification->score =  $request['subject_'. $subject->id . 'parcial_'. $parcial->id];
+                $qualification->save();
             }
 
-            $qualification->score =  $request['subject_'. $subject->id];
-            $qualification->save();
 
             
         }

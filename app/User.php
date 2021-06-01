@@ -46,10 +46,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Period::class, 'period_user');
     }
 
-    public function getQualification($subject_id, $period_id)
+    public function getQualificationScore($subject_id, $parcial_id)
     {
-        return Qualification::where('user_id', $this->id)
-        ->where('period_id', $period_id)
+        $qualification = Qualification::where('user_id', $this->id)
+        ->where('parcial_id', $parcial_id)
         ->where('subject_id', $subject_id)->first();
+
+        if($qualification) {
+            return $qualification->score;
+        }
+
+        return null;
     }
 }

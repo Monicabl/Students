@@ -17,7 +17,9 @@
             <thead>
                 <tr>
                     <th scope="col">--</th>
-                    <th scope="col">Calificaciones</th>                    
+                    @foreach ($period->parcials as $parcial)                        
+                        <th scope="col">{{ $parcial->name }}</th>                    
+                    @endforeach
                   </tr>
             </thead>
 
@@ -26,12 +28,15 @@
                     
                     <tr>
                         <th>{{ $subject->name }} </th>
-                        <td><input 
-                                type="number" 
-                                name="subject_{{$subject->id}}"
-                                value="{{ $student->getQualification($subject->id, $period->id)->score }}"
-                            >
-                        </td>
+                        @foreach ($period->parcials as $parcial)     
+
+                            <td><input 
+                                    type="number" 
+                                    name="subject_{{$subject->id}}parcial_{{ $parcial->id }}"
+                                    value="{{ $student->getQualificationScore($subject->id, $parcial->id) }}"
+                                >
+                            </td>
+                        @endforeach
                     </tr>
                 @endforeach
             </tbody>

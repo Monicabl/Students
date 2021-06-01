@@ -130,7 +130,7 @@ class PeriodController extends Controller
         $period = Period::find($id);
         // $belongsToManyStudents = $period->students(); // (new BelongsToMany)
         // $belongsToManyStudents->attach($request->user_id);
-        $period->students()->attach($request->user_id);
+        $period->students()->attach($request->get('user_id'));
         return redirect('periods/'. $id);
     }
     public function detachStudent($id, $student_id)
@@ -160,7 +160,7 @@ class PeriodController extends Controller
     public function attachSubject($id, Request $request)
     {
         $period = Period::find($id);
-        $period->subjects()->attach($request->subject_id);
+        $period->subjects()->attach($request->get('subject_id'));
         return redirect('periods/'. $id);
     }
     public function detachSubject($id, $subject_id)
