@@ -16,14 +16,14 @@ class UsersTableSeeder extends Seeder
         $user->name = 'Rocky';
         $user->last_name = 'Barboa';
         $user->email = 'rocky@gmail.com';
-        $user->user_type = 'estudiante';
+        $user->user_type = User::TYPE_STUDENT;
         $user->save();
 
         $user = new User;
         $user->name = 'Chato';
         $user->last_name = 'Colocho';
         $user->email = 'chato@gmail.com';
-        $user->user_type = 'estudiante';
+        $user->user_type = User::TYPE_STUDENT;
         $user->save();
 
         $user = new User;
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
         $user->last_name = 'Elizabeth';
         $user->email = 'admin@gmail.com';
         $user->password = bcrypt('secret');
-        $user->user_type = 'administrador';
+        $user->user_type = User::TYPE_ADMIN;
         $user->save();
     }
 }

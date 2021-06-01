@@ -22,6 +22,10 @@ class PeriodsTableSeeder extends Seeder
         $period->save();
         
         $period->students()->attach(1);  
+
+        $period->subjects()->attach(1);
+        $period->subjects()->attach(2);
+        $period->subjects()->attach(3);
         
         $parcial = new Parcial;
         $parcial->period_id = $period->id;

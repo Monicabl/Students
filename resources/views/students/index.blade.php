@@ -3,7 +3,9 @@
     <div class="row">
         <div class="col-md-8">
             <br>
-                <input type="search" class="form-control input-text" placeholder="Buscar estudiante">
+            <form action="">
+              <input type="search" name="name" class="form-control input-text" placeholder="Buscar estudiante">
+            </form>
         </div>
         <div class="col">
             <br>
@@ -24,12 +26,20 @@
           @foreach($students as $student)
           <tr>
             <th scope="row">{{ $student->id}}</th>
-            <td>{{ $student->name}}</td>
-            <td>{{$student->last_name }}</td>
-            <td>
-                <a href="/students/{{$student->id}}/edit" class="btn btn-outline-success"> editar </a>
-                <a href="" class="btn btn-outline-danger">eliminar</a>
-                <a href="/students/{{$student->id}}" class="btn btn-outline-info"> ver </a>
+            <td>{{ $student->last_name}}</td>
+            <td>{{$student->name }}</td>
+            <td class="d-flex">
+              <div>
+                <a href="/students/{{$student->id}}/edit" class="btn btn-outline-success mx-1"> editar </a>
+              </div>
+              <div>
+                <a href="/students/{{$student->id}}" class="btn btn-outline-info mx-1"> ver </a>
+              </div>
+              <form action="/students/{{ $student->id}}" method="POST">
+                  @csrf
+                  @method('delete')
+                  <button class="btn btn-outline-danger " type="submit"> Delete </button>
+              </form>
             </td>
           </tr>
           @endforeach

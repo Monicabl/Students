@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class subjectController extends Controller
 {
@@ -11,9 +13,11 @@ class subjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request)
     {
-        return view('subjects.index');
+        $subjects = Subject::all();
+        $subjects = Subject::where('name','like',"%{$request->name}%")->get();
+        return view('subjects.index')->with(['subjects' => $subjects]);
     }
 
     /**
@@ -23,7 +27,7 @@ class subjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('subjects.create');
     }
 
     /**
@@ -34,8 +38,13 @@ class subjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $subject = new Subject();
+        $subject->name = $request->get('name');
+        $subject->description = $request->get('description');
+        $subject->save();
+        return redirect('/subjects');
+        }
+
 
     /**
      * Display the specified resource.
@@ -55,7 +64,8 @@ class subjectController extends Controller
      */
     public function edit($id)
     {
-
+        $subject = Subject::find($id);
+        return view('subjects.edit')->with('subject', $subject);
     }
 
     /**
@@ -67,7 +77,12 @@ class subjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::find($id);
+        $subject->name = $request->get('name');
+        $subject->description = $request->get('description');
+        $subject->save();
+        return redirect('/subjects');
+
     }
 
     /**
@@ -78,6 +93,9 @@ class subjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+        $subject->delete();
+        return redirect('/subjects');
+
     }
 }

@@ -32,5 +32,23 @@
           <input type="text" class="form-control" id="" name="" placeholder="{{$student->description}}"  disabled required>
         </div>
       </div> <br> 
+
+          <h3>Periodos</h3>
+    
+          <ul class="list-group">
+            @foreach($student->periods as $period)
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{$period->name}}
+    
+              <span class="badge bg-success rounded-pill">
+                <a href="/students/{{ $student->id }}/qualifications/{{ $period->id }}" 
+                  style="color: white">Ver Calificaciones</a> 
+              </span>
+              
+            </li>
+            @endforeach
+          </ul>
+      </div>    
+  
     </form>
 @endsection

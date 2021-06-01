@@ -10,6 +10,11 @@ class Period extends Model
     {
         return $this->belongsToMany(User::class, 'period_user');
     }
+    
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'subject_period');
+    }
 
     public function parcials()
     {

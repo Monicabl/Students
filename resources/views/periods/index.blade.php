@@ -2,8 +2,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-8">
+          <form action="">
             <br>
-                <input type="search" class="form-control input-text" placeholder="Buscar estudiante">
+                <input type="search" name="name" class="form-control input-text" placeholder="Buscar periodo">
+          </form>
         </div>
         <div class="col">
             <br>
@@ -26,9 +28,15 @@
             <th scope="row">{{ $period->name }}</th>
             <td>{{ $period->beginning }}</td>
             <td>{{ $period->end }}</td>
-            <td>
-                <a href="/periods/{{ $period->id }}/edit" class="btn btn-outline-success"> editar </a>
-                <a href="" class="btn btn-outline-danger">eliminar</a>
+            <td class="d-flex">
+              <div>
+                <a href="/periods/{{ $period->id }}/edit" class="btn btn-outline-success mx-1"> editar </a>
+              </div>
+              <form action="/periods/{{$period->id}}" method="POST">
+                @csrf
+                @method('delete')
+                <button class="btn btn-outline-danger mx-1 " type="submit"> Delete </button>
+              </form>
                 <a href="/periods/{{ $period->id }}" class="btn btn-outline-info"> ver </a>
             </td>
           </tr>

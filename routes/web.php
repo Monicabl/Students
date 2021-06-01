@@ -24,4 +24,10 @@ Route::resource('/periods','PeriodController');
 Route::post('/periods/{period}/attach-student','PeriodController@attachStudent');
 Route::get('/periods/{period}/attach-student','PeriodController@attachStudentView');
 Route::get('/periods/{period}/detach-student/{student_id}','PeriodController@detachStudent');
-Route::post('/students/create', 'StudentController@store');
+
+Route::post('/periods/{period}/attach-subject','PeriodController@attachSubject');
+Route::get('/periods/{period}/attach-subject','PeriodController@attachSubjectView');
+Route::get('/periods/{period}/detach-subject/{subject_id}','PeriodController@detachSubject');
+
+Route::get('/students/{student}/qualifications/{period_id}','StudentController@qualificationsView');
+Route::post('/students/{student}/qualifications/{period_id}','StudentController@qualificationsSave');

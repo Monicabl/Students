@@ -17,6 +17,11 @@ class CreatePivotTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->bigInteger('period_id')->unsigned()->index(); 
         });
+
+        Schema::create('subject_period', function (Blueprint $table) {
+            $table->bigInteger('subject_id')->unsigned()->index();
+            $table->bigInteger('period_id')->unsigned()->index(); 
+        });
     }
 
     /**
@@ -27,5 +32,6 @@ class CreatePivotTable extends Migration
     public function down()
     {
         Schema::dropIfExists('period_user');
+        Schema::dropIfExists('subject_period');
     }
 }

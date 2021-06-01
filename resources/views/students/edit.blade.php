@@ -6,14 +6,16 @@
         <a class="btn btn-outline-success" href="/students/"> Back</a>
     </div>
     <div class="col-8">
-        <h2> Editar estudiante: </h2> <br>
+        <h2> Editar estudiante: {{$student->name}} </h2> <br>
     </div>
 </div>
-    <form action="">
+    <form action="/students/{{$student->id}}" method="POST">
+      @csrf
+      @method('put')
         <div class="row">
             <div class="form-group col-md-6">
                 <label> Matricula </label>
-                <input type="text" class="form-control"  id="id" name="id" value="{{$student->id}}" placeholder="matricula" required>
+                <input clastype="text" class="form-control"  id="" name="" placeholder="{{$student->id}}" disabled required>
               </div>
               <div class="form-group col-md-6">
                 <label> Correo </label>
@@ -32,6 +34,6 @@
             <input type="text" class="form-control" id="description" name="description" value="{{$student->description}}" placeholder="Descripción" required>
           </div>
         </div> <br> 
-        <button class="btn btn-primary"> Agregar </button>  
+        <button class="btn btn-primary" type="submit"> Agregar </button>  
     </form>
 @endsection
