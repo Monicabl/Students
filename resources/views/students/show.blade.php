@@ -35,9 +35,18 @@
 
           <h3>Periodos</h3>
     
-          <ul class="list-group">
+          <ul class="list-group" id="periodos">
+            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
+              MONICAAAAA
+    
+              <span class="badge bg-success rounded-pill">
+                <a href="/students/1/qualifications/1" 
+                  style="color: white">Ver Calificaciones</a> 
+              </span>
+              
+            </li> --}}
             @foreach($student->periods as $period)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{-- <li class="list-group-item d-flex justify-content-between align-items-center">
               {{$period->name}}
     
               <span class="badge bg-success rounded-pill">
@@ -45,10 +54,33 @@
                   style="color: white">Ver Calificaciones</a> 
               </span>
               
-            </li>
+            </li> --}}
             @endforeach
           </ul>
       </div>    
   
     </form>
+
+    <script>
+
+      fetch('/students/{{$student->id}}/periods')
+        .then(response => response.json())
+        .then(data =>  { 
+          var html = ""
+          data.forEach((element) => {
+                html += `  <li class="list-group-item d-flex justify-content-between align-items-center">
+              `+ element.name +`
+                    <span class="badge bg-success rounded-pill">
+                      <a href="/students/{{$student->id}}/qualifications/1" 
+                        style="color: white">Ver Calificaciones</a> 
+                    </span>
+                    
+                  </li>`
+          }); 
+          document.getElementById("periodos").innerHTML = html;
+        })
+        // var data = '<li class="list-group-item d-flex justify-content-between align-items-center" <span class="badge bg-success rounded-pill"> <a href="/students/1/qualifications/1"  style="color: white">Ver Calificaciones</a>  </span> </li>'
+
+
+    </script>
 @endsection

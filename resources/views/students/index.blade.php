@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <br>
             <form action="">
-              <input type="search" name="name" class="form-control input-text" placeholder="Buscar estudiante">
+              {{-- <input type="search" name="name" class="form-control input-text" placeholder="Buscar estudiante"> --}}
             </form>
         </div>
         <div class="col">

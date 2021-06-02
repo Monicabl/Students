@@ -32,12 +32,14 @@
               <div>
                 <a href="/periods/{{ $period->id }}/edit" class="btn btn-outline-success mx-1"> editar </a>
               </div>
+              <div>
+                <a href="/periods/{{ $period->id }}" class="btn btn-outline-info"> ver </a>
+              </div>
               <form action="/periods/{{$period->id}}" method="POST">
                 @csrf
                 @method('delete')
                 <button class="btn btn-outline-danger mx-1 " type="submit"> Delete </button>
               </form>
-                <a href="/periods/{{ $period->id }}" class="btn btn-outline-info"> ver </a>
             </td>
           </tr>
           @endforeach

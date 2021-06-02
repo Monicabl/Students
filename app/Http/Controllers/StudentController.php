@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use App\Period;
 use App\Qualification;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use DB;
 
 class studentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index( Request $request)
-    {   $students = User::where('user_type', User::TYPE_STUDENT)
-                    ->where('name','like',"%{$request->name}%")->get(); //solo muestra al usuario
+    {   
+        $students = DB::select('CALL GetStudents()');
+        
+        
+        // $students = User::where('user_type', User::TYPE_STUDENT)
+        //             ->where('name','like',"%{$request->name}%")->get(); //solo muestra al usuario
     // {   $students = User::where([
     //         ['name', 'like', "%{$request->name}%"],
     //         ['user_type', User::TYPE_STUDENT]
@@ -125,9 +136,7 @@ class studentController extends Controller
     public function qualificationsSave($id, $period_id, Request $request)
     {
         $student = User::find($id);
-        $period = Period::find($id);
-
-        $qualifications = [];
+        $period = Period::find($id); 
 
         $request =  $request->all() ;
         // dd($request);
@@ -156,5 +165,14 @@ class studentController extends Controller
         }
 
         return back()->with('msj', 'Calificaciones actualizadas');
+    }
+
+
+    public function periodsApi($id)
+    {
+        $periods = Period::whereHas('students', function (Builder $query) use ($id ) {
+            $query->where('id', $id);
+        })->get();
+        return response()->json($periods);
     }
 }

@@ -22,9 +22,9 @@
             <a class="nav-link" href="/periods">Periodos</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <a class="btn btn-danger" href="#">Logout</a>
-        </form>
+        <div class="d-flex">
+          <a class="btn btn-info" href="{{ url('logout') }}">Logout</a>
+        </div>
       </div>
   </nav>
     <div class="container">
