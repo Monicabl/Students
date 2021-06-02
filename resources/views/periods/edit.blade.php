@@ -19,7 +19,7 @@
             </div>
               <div class="form-group col-md-6">
                 <label> Inicio </label>
-                <input type="text" class="form-control" id="beginning" name="beginning" value="{{ $period->beginning }}" required>
+                <input type="date"  class="form-control" id="beginning" name="beginning" value="{{ $period->beginning }}" required>
               </div>
               <div class="form-group col-md-6">
                 <label> Fin </label>
