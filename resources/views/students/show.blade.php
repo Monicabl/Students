@@ -71,7 +71,7 @@
                 html += `  <li class="list-group-item d-flex justify-content-between align-items-center">
               `+ element.name +`
                     <span class="badge bg-success rounded-pill">
-                      <a href="/students/{{$student->id}}/qualifications/1" 
+                      <a href="/students/{{$student->id}}/qualifications/`+element.id+`" 
                         style="color: white">Ver Calificaciones</a> 
                     </span>
                     

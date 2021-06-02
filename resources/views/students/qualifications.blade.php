@@ -33,7 +33,7 @@
                             <td><input 
                                     type="number" 
                                     name="subject_{{$subject->id}}parcial_{{ $parcial->id }}"
-                                    value="{{ $student->getQualificationScore($subject->id, $parcial->id) }}"
+                                    value="{{ $student->getQualificationScore($subject->id, $parcial->id) }}" required
                                 >
                             </td>
                         @endforeach

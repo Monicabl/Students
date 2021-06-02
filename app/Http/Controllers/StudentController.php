@@ -136,7 +136,7 @@ class studentController extends Controller
     public function qualificationsSave($id, $period_id, Request $request)
     {
         $student = User::find($id);
-        $period = Period::find($id); 
+        $period = Period::find($period_id); 
 
         $request =  $request->all() ;
         // dd($request);
